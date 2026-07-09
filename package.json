@@ -1,0 +1,38 @@
+{
+  "name": "routes-capstone-challenge",
+  "version": "1.0.0",
+  "description": "Express + EJS production setup with Tailwind CSS, hot reload, and hardening",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start:server": "nodemon -e js,ejs server.js",
+    "build:css": "npx tailwindcss -i ./public/src/main.css -o ./public/src/output.css --watch",
+    "sync:browser": "browser-sync start --proxy \"localhost:3000\" --files \"views/**/*.ejs, public/src/output.css\" --no-ui",
+    "dev": "concurrently \"npm run start:server\" \"npm run build:css\" \"npm run sync:browser\"",
+    "build": "npx tailwindcss -i ./public/src/main.css -o ./public/src/output.css --minify",
+    "start": "node server.js",
+    "start:prod": "NODE_ENV=production node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": ["express", "ejs", "tailwindcss", "boilerplate"],
+  "author": "michael",
+  "license": "ISC",
+  "dependencies": {
+    "compression": "^1.8.1",
+    "dotenv": "^17.4.2",
+    "ejs": "^6.0.1",
+    "express": "^5.2.1",
+    "helmet": "^8.2.0",
+    "method-override": "^3.0.0",
+    "morgan": "^1.10.0",
+    "tailwindcss": "^4.3.2",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.3.2",
+    "browser-sync": "^3.0.4",
+    "concurrently": "^10.0.3"
+  }
+}
