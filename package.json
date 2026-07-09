@@ -7,7 +7,7 @@
   "scripts": {
     "start:server": "nodemon -e js,ejs server.js",
     "build:css": "npx tailwindcss -i ./public/src/main.css -o ./public/src/output.css --watch",
-    "sync:browser": "browser-sync start --proxy \"localhost:3000\" --files \"views/**/*.ejs, public/src/output.css\" --no-ui",
+    "sync:browser": "browser-sync start --proxy \"localhost:3000\" --port 3001 --files \"views/**/*.ejs, public/src/output.css\" --no-ui",
     "dev": "concurrently \"npm run start:server\" \"npm run build:css\" \"npm run sync:browser\"",
     "build": "npx tailwindcss -i ./public/src/main.css -o ./public/src/output.css --minify",
     "start": "node server.js",
