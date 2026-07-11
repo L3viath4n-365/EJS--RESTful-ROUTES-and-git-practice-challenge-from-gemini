@@ -42,11 +42,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/project', (req, res) => {
-    res.render('projects/project');
-});
-
-app.get('/show', (req, res) => {
-    res.render('projects/show');
+    res.render('projects/project', { dataBase });
 });
 
 app.get('/new', (req, res) => {
@@ -56,25 +52,25 @@ app.get('/new', (req, res) => {
 app.post('/project', (req, res) => {
     const { title, stack } = req.body;
     const status = ["Stable", "In Progress", "Breaking"];
-    const randNum = Math.floor(Math.random() * 3);
+    const randNum = Math.floor(Math.random() * status.length);
     let randomStatus = status[randNum];
 
     let healthScore = Math.floor(Math.random() * 100) + 1;
 
     dataBase.push({ title, stack, status: randomStatus, healthScore, id: uuidv4 });
 
-    res.redirect('/project')
+    res.redirect('/project');
 });
 
 // ERROR HANDLING MIDDLEWARE
-// app.use((_req, res) => {
-//     res.status(404).send('404 — Page not found');
-// });
+app.use((_req, res) => {
+    res.status(404).send('404 — Page not found');
+});
 
-// app.use((err, _req, res, _next) => {
-//     console.error(err.stack);
-//     res.status(500).send('500 — Internal Server Error');
-// });
+app.use((err, _req, res, _next) => {
+    console.error(err.stack);
+    res.status(500).send('500 — Internal Server Error');
+});
 
 // SERVER
 app.listen(port, () => {
