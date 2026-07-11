@@ -57,7 +57,18 @@ app.post('/project', (req, res) => {
 
     let healthScore = Math.floor(Math.random() * 100) + 1;
 
-    dataBase.push({ title, stack, status: randomStatus, healthScore, id: uuidv4 });
+    dataBase.push({ title, stack, status: randomStatus, healthScore, id: uuidv4() });
+
+    res.redirect('/project');
+});
+
+app.delete('/delete/:id', (req, res) => {
+    const { id } = req.params;
+    const index = dataBase.findIndex(project => project.id === id);
+
+    if (index !== -1) {
+        dataBase.splice(index, 1);
+    }
 
     res.redirect('/project');
 });
