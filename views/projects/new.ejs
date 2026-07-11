@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Card</title>
+    <link rel="stylesheet" href="/src/output.css">
+</head>
+
+<body class=" w-screen h-screen flex flex-col gap-5 justify-center items-center bg-slate-400">
+
+    <a href="/project" class="capitalize font-bold text-slate-100 self-start ml-6 mb-10 hover:text-purple-400 underline">back to dashboard</a>
+
+    <form action="/project" method="post" class="flex flex-col gap-5 w-[90vw] font-bold">
+        <div class="flex flex-col gap-3">
+            <label for="dev-title" class="capitalize">dev title:</label>
+            <div
+                class="relative p-0.5 rounded-md bg-gray-300 focus-within:bg-linear-to-r focus-within:from-blue-500 focus-within:via-purple-500 focus-within:to-red-500">
+                <input type="text" name="title" placeholder="Your Dev title..."
+                    class="w-full bg-white text-gray-900 p-2 rounded-[5px] outline-none" required/>
+            </div>
+        </div>
+
+        <div class="flex flex-col gap-3">
+            <label for="dev-title" class="capitalize">tech stack:</label>
+            <div
+                class="relative p-0.5 rounded-md bg-gray-300 focus-within:bg-linear-to-r focus-within:from-blue-500 focus-within:via-purple-500 focus-within:to-red-500">
+                <textarea type="text" name="stack" placeholder="Your Text Stack..."
+                    class="w-full bg-white text-gray-900 p-2 rounded-[5px] outline-none" required></textarea>
+            </div>
+        </div>
+
+        <div
+            class="relative p-0.5 rounded-2xl bg-gray-300 bg-linear-to-r from-green-500 via-purple-500 to-blue-500">
+            <button type="submit"
+                class="bg-purple-500 p-5 font-bold text-slate-200 rounded-2xl w-full bg-linear-to-r from-blue-500 via-purple-500 to-green-500">
+                Create card
+            </button>
+        </div>
+
+    </form>
+</body>
+
+</html>

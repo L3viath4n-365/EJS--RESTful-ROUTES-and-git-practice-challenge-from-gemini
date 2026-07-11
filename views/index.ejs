@@ -1,12 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
     <link rel="stylesheet" href="./src/output.css">
 </head>
-<body>
-    <h1 class="bg-green-400">Dev Dashboard</h1>
+
+<body class="w-screen h-screen flex justify-center items-center bg-slate-400">
+
+    <form action="/project" method="get">
+        <div class="relative p-0.5 rounded-2xl bg-gray-300 bg-linear-to-r from-green-500 via-purple-500 to-blue-500">
+            <button type="submit"
+                class="bg-purple-500 p-10 font-bold text-slate-200 rounded-2xl w-full bg-linear-to-r from-blue-500 via-purple-500 to-green-500 capitalize">
+                go to projects
+            </button>
+        </div>
+    </form>
+
 </body>
+
 </html>
