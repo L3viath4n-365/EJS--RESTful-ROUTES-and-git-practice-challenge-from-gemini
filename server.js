@@ -11,22 +11,18 @@ const port = process.env.PORT || 3000;
 const nodeEnv = process.env.NODE_ENV || 'development';
 const __dirname = import.meta.dirname;
 
-// CONFIGURATION & VIEWS
 app.set('view engine', 'ejs');
 app.set('views', `${__dirname}/views`);
 
-// SECURITY & UTILITY MIDDLEWARE
 app.use(helmet({ contentSecurityPolicy: false }));
 app.use(compression());
 app.use(morgan('dev'));
 app.use(methodOverride('_method'));
 
-// BODY PARSERS & STATIC FILES
 app.use(express.static(`${__dirname}/public`));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// EJS LOCALS HELPERS
 app.use((req, res, next) => {
     res.locals.req = req;
     res.locals.hasAll = (...keys) => keys.every(key => key in res.locals);
@@ -36,7 +32,6 @@ app.use((req, res, next) => {
 
 const dataBase = [];
 
-// ROUTES
 app.get('/', (req, res) => {
     res.render('index');
 });
@@ -73,7 +68,6 @@ app.delete('/delete/:id', (req, res) => {
     res.redirect('/project');
 });
 
-// ERROR HANDLING MIDDLEWARE
 app.use((_req, res) => {
     res.status(404).send('404 — Page not found');
 });
@@ -83,7 +77,6 @@ app.use((err, _req, res, _next) => {
     res.status(500).send('500 — Internal Server Error');
 });
 
-// SERVER
 app.listen(port, () => {
     console.log(`🚀 Server online on port ${port} (${nodeEnv})`);
 });
