@@ -68,13 +68,13 @@ app.delete('/delete/:id', (req, res) => {
     res.redirect('/project');
 });
 
-app.use((_req, res) => {
-    res.status(404).send('404 — Page not found');
-});
 
 app.use((err, _req, res, _next) => {
     console.error(err.stack);
-    res.status(500).send('500 — Internal Server Error');
+    
+    const statusCode = res.statusCode >= 400 ? res.statusCode : 500;
+
+    res.status(statusCode).send('500 — Internal Server Error');
 });
 
 app.listen(port, () => {
