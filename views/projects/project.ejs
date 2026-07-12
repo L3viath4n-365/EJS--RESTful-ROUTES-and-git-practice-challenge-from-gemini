@@ -31,7 +31,7 @@
                     <p><span class="uppercase">h</span>ealth score: <%= d.healthScore %>
                     </p>
 
-                    <form action="/delete/<%= d.id %>?_method=DELETE" method="POST" class="z-10">
+                    <form action="/projects/<%= d.id %>?_method=DELETE" method="POST" class="z-10">
                         <button type="submit"
                             class="uppercase text-red-400 hover:text-red-600 transition-colors cursor-pointer">[delete
                             card]</button>
@@ -45,7 +45,7 @@
 
     </div>
 
-    <form action="/new" method="get">
+    <form action="projects/new" method="get">
         <button type="submit"
             class="p-5 font-bold text-slate-200 rounded-2xl w-full bg-linear-to-r from-zinc-500 via-yellow-300 to-red-500">
             Create new card
