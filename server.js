@@ -69,10 +69,13 @@ app.delete('/projects/:id', (req, res) => {
 });
 
 app.use((err, _req, res, _next) => {
-    console.error(err.stack);
+    if (process.env.NODE_ENV === 'development') {
+        console.error(err.stack);
+    } else {
+        console.error(err.message);
+    }
 
     const statusCode = res.statusCode >= 400 ? res.statusCode : 500;
-
     res.status(statusCode).send('500 — Internal Server Error');
 });
 
