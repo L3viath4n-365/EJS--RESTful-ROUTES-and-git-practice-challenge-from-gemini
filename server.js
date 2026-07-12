@@ -36,15 +36,15 @@ app.get('/', (req, res) => {
     res.render('index');
 });
 
-app.get('/project', (req, res) => {
+app.get('/projects', (req, res) => {
     res.render('projects/project', { dataBase });
 });
 
-app.get('/new', (req, res) => {
+app.get('/projects/new', (req, res) => {
     res.render('projects/new');
 });
 
-app.post('/project', (req, res) => {
+app.post('/projects', (req, res) => {
     const { title, stack } = req.body;
     const status = ["Stable", "In Progress", "Breaking"];
     const randNum = Math.floor(Math.random() * status.length);
@@ -54,10 +54,10 @@ app.post('/project', (req, res) => {
 
     dataBase.push({ title, stack, status: randomStatus, healthScore, id: uuidv4() });
 
-    res.redirect('/project');
+    res.redirect('/projects');
 });
 
-app.delete('/delete/:id', (req, res) => {
+app.delete('/projects/:id', (req, res) => {
     const { id } = req.params;
     const index = dataBase.findIndex(project => project.id === id);
 
@@ -65,13 +65,12 @@ app.delete('/delete/:id', (req, res) => {
         dataBase.splice(index, 1);
     }
 
-    res.redirect('/project');
+    res.redirect('/projects');
 });
-
 
 app.use((err, _req, res, _next) => {
     console.error(err.stack);
-    
+
     const statusCode = res.statusCode >= 400 ? res.statusCode : 500;
 
     res.status(statusCode).send('500 — Internal Server Error');
