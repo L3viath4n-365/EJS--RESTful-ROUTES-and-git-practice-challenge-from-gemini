@@ -117,6 +117,7 @@ To execute a clean RESTful deletion from an EJS template (project.ejs or show.ej
 ```html
 <form action="/projects/<%= project.id %>?_method=DELETE" method="POST">
   <button type="submit">Destroy Project Log</button>
+  <button type="submit">Destroy Project Log</button>
 </form>
 
 ```
