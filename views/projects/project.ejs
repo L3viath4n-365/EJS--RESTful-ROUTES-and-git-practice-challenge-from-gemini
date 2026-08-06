@@ -30,8 +30,8 @@
                         <p><span class="uppercase">h</span>ealth score: <%= d.health_score %>
                         </p>
 
-                        <form action="/projects/show" method="post" class="z-10">
-                            <button type="submit"  name="id" value="<%= d.id %>"
+                        <form action="/projects/<%= d.id %>" method="get" class="z-10">
+                            <button type="submit"
                                 class="uppercase text-blue-400 hover:text-blue-600 font-bold transition-colors cursor-pointer">[show
                                 card]</button>
                         </form>
