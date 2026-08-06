@@ -1,57 +1,64 @@
-<!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Project</title>
-    <link rel="stylesheet" href="src/output.css">
+    <link rel="stylesheet" href="/src/output.css">
 </head>
 
-<body class=" w-screen min-h-screen flex flex-col gap-5 justify-center items-center bg-slate-400">
+<body class=" w-screen min-h-screen flex flex-col justify-center items-center bg-slate-400">
+    <main class="w-screen min-h-screen flex flex-col gap-3 justify-center items-center">
 
+        <div
+            class="grid grid-cols-1 has-[>:nth-child(2)]:md:grid-cols-2 gap-3 w-fit max-w-[80vw] bg-linear-to-r from-zinc-800 via-zinc-400 to-yellow-400 rounded-2xl text-white font-bold overflow-hidden mx-auto p-2">
 
-    <div class="grid grid-cols-1 w-[80vw] gap-3 bg-linear-to-r from-zinc-800 via-zinc-400 to-yellow-400 rounded-2xl text-white font-bold overflow-hidden 
-            md:grid-cols-2 md:w-[90vw]">
+            <% for (let d of dataBase) { %>
+                <div
+                    class="flex flex-col gap-5 justify-between p-5 border border-white/10 rounded-xl bg-zinc-900/40 backdrop-blur-xs max-w-full">
 
-        <% for (let d of dataBase) { %>
-            <div
-                class="relative flex flex-col gap-5 justify-between p-5 border border-white/10 rounded-xl m-2 bg-zinc-900/40 backdrop-blur-xs">
+                    <div class="flex flex-col gap-3 h-full">
+                        <p><span class="uppercase">s</span>tatus: <%= d.status %>
+                        </p>
+                        <p><span class="uppercase">d</span>ev title: <%= d.title %>
+                        </p>
+                        <p><span class="uppercase">t</span>ech stack: <%= d.tech_stack %>
+                        </p>
+                    </div>
 
-                <div class="flex flex-col gap-3 h-full">
-                    <p><span class="uppercase">s</span>tatus: <%= d.status %>
-                    </p>
-                    <p><span class="uppercase">d</span>ev title: <%= d.title %>
-                    </p>
-                    <p><span class="uppercase">t</span>ech stack: <%= d.stack %>
-                    </p>
+                    <div class="flex justify-between items-center mt-auto pt-2">
+                        <p><span class="uppercase">h</span>ealth score: <%= d.health_score %>
+                        </p>
+
+                        <form action="/projects/show" method="post" class="z-10">
+                            <button type="submit"  name="id" value="<%= d.id %>"
+                                class="uppercase text-blue-400 hover:text-blue-600 font-bold transition-colors cursor-pointer">[show
+                                card]</button>
+                        </form>
+
+                        <form action="/projects/<%= d.id %>?_method=DELETE" method="POST" class="z-10">
+                            <button type="submit"
+                                class="uppercase text-red-400 hover:text-red-600 font-bold transition-colors cursor-pointer">[delete
+                                card]</button>
+                        </form>
+                    </div>
+
+                    <div class="flex justify-between items-center mt-auto pt-2">
+                        <p>
+                            <%= d.created_at %>
+                        </p>
+                    </div>
+
                 </div>
+                <% } %>
+        </div>
 
-                <div class="flex justify-between items-center mt-auto pt-2">
-                    <p><span class="uppercase">h</span>ealth score: <%= d.healthScore %>
-                    </p>
+        <form action="projects/new" method="get">
+            <button type="submit"
+                class="p-5 font-bold text-slate-200 rounded-2xl w-full bg-linear-to-r from-zinc-500 via-yellow-300 to-red-500">
+                Create new card
+            </button>
+        </form>
+    </main>
 
-                    <form action="/projects/<%= d.id %>?_method=DELETE" method="POST" class="z-10">
-                        <button type="submit"
-                            class="uppercase text-red-400 hover:text-red-600 transition-colors cursor-pointer">[delete
-                            card]</button>
-                    </form>
-                </div>
-
-            </div>
-        <% } %>
-
-    </div>
-
-    </div>
-
-    <form action="projects/new" method="get">
-        <button type="submit"
-            class="p-5 font-bold text-slate-200 rounded-2xl w-full bg-linear-to-r from-zinc-500 via-yellow-300 to-red-500">
-            Create new card
-        </button>
-    </form>
-
-</body>
-
-</html>
+    <%- include('../partials/footer.ejs') %>

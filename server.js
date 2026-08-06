@@ -4,7 +4,7 @@ import morgan from 'morgan';
 import helmet from 'helmet';
 import compression from 'compression';
 import methodOverride from 'method-override';
-import { v4 as uuidv4 } from 'uuid';
+import apiRouter  from './routes/api.js';
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -30,43 +30,10 @@ app.use((req, res, next) => {
     next();
 });
 
-const dataBase = [];
-
-app.get('/', (req, res) => {
-    res.render('index');
-});
-
-app.get('/projects', (req, res) => {
-    res.render('projects/project', { dataBase });
-});
-
-app.get('/projects/new', (req, res) => {
-    res.render('projects/new');
-});
-
-app.post('/projects', (req, res) => {
-    const { title, stack } = req.body;
-    const status = ["Stable", "In Progress", "Breaking"];
-    const randNum = Math.floor(Math.random() * status.length);
-    let randomStatus = status[randNum];
-
-    let healthScore = Math.floor(Math.random() * 100) + 1;
-
-    dataBase.push({ title, stack, status: randomStatus, healthScore, id: uuidv4() });
-
-    res.redirect('/projects');
-});
-
-app.delete('/projects/:id', (req, res) => {
-    const { id } = req.params;
-    const index = dataBase.findIndex(project => project.id === id);
-
-    if (index !== -1) {
-        dataBase.splice(index, 1);
-    }
-
-    res.redirect('/projects');
-});
+app.use('/', apiRouter);
+app.use('/projects', apiRouter);
+app.use('/projects/new', apiRouter);
+app.use('/projects/:id', apiRouter);
 
 app.use((err, _req, res, _next) => {
     if (process.env.NODE_ENV === 'development') {
@@ -80,5 +47,5 @@ app.use((err, _req, res, _next) => {
 });
 
 app.listen(port, () => {
-    console.log(`🚀 Server online on port ${port} (${nodeEnv})`);
+    console.log(`Server online on port ${port} (${nodeEnv})`);
 });
