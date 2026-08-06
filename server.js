@@ -31,9 +31,6 @@ app.use((req, res, next) => {
 });
 
 app.use('/', apiRouter);
-app.use('/projects', apiRouter);
-app.use('/projects/new', apiRouter);
-app.use('/projects/:id', apiRouter);
 
 app.use((err, _req, res, _next) => {
     if (process.env.NODE_ENV === 'development') {
