@@ -4,6 +4,17 @@ import { v7 as uuidv7 } from 'uuid';
 
 const router = express.Router();
 
+router.get('/', async (req, res, next) => {
+    try {
+        const result = await db.query( 'SELECT * FROM public.projects');
+        const data = result.rows;
+
+        res.render('index', { data });
+    } catch (err) {
+        next(err);
+    }
+});
+
 router.get('/projects', async (req, res, next) => {
     try {
         const result = await db.query('SELECT * FROM public.projects ORDER BY created_at DESC');
