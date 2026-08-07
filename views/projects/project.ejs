@@ -7,11 +7,36 @@
     <link rel="stylesheet" href="/src/output.css">
 </head>
 
-<body class=" w-screen min-h-screen flex flex-col justify-center items-center bg-slate-400">
-    <main class="w-screen min-h-screen flex flex-col gap-3 justify-center items-center">
+<body class="w-screen min-h-screen flex flex-col justify-center items-center bg-slate-400">
+
+    <header class="w-full h-32">
+        <form action="/projects/filter" method="get" class="w-[90%] self-start justify-self-center">
+
+            <search class="flex flex-row justify-around w-full">
+                <div class="flex flex-col gap-3 w-[80%]">
+                    <label for="dev-title" class="capitalize text-zinc-950 font-bold">search filter</label>
+                    <div
+                        class="relative p-0.5 w-[] rounded-md bg-gray-300 focus-within:bg-linear-to-r focus-within:from-blue-500 focus-within:via-purple-500 focus-within:to-red-500">
+                        <input type="text" name="title"
+                            placeholder="<%= `filter by title`.toUpperCase() %>" autocomplete="off"
+                            autocorrect="on" autocapitalize autofocus
+                            class="bg-white text-gray-900 p-2 rounded-[5px] outline-none w-full"/>
+                    </div>
+                </div>
+
+                <button type="submit"
+                    class="rounded-md h-fit w-fit p-2.5 md:p-2 md:px-15 md:text-lg self-end justify-self-end bg-linear-to-r from-green-300 via-green-500 to-blue-700 font-bold text-slate-100 uppercase">search</button>
+
+            </search>
+
+        </form>
+
+    </header>
+
+    <main class="w-screen min-h-screen flex flex-col gap-10 items-center">
 
         <div
-            class="grid grid-cols-1 has-[>:nth-child(2)]:md:grid-cols-2 gap-3 w-fit max-w-[80vw] bg-linear-to-r from-zinc-800 via-zinc-400 to-yellow-400 rounded-2xl text-white font-bold overflow-hidden mx-auto p-2">
+            class="grid grid-cols-1 has-[>:nth-child(2)]:md:grid-cols-2 w-fit max-w-[80vw] bg-linear-to-r from-zinc-800 via-zinc-400 to-yellow-400 rounded-2xl text-white font-bold overflow-hidden mx-auto p-2">
 
             <% for (let d of dataBase) { %>
                 <div
@@ -32,13 +57,13 @@
 
                         <form action="/projects/<%= d.id %>" method="get" class="z-10">
                             <button type="submit"
-                                class="uppercase text-blue-400 hover:text-blue-600 font-bold transition-colors cursor-pointer">[show
+                                class="uppercase text-blue-400 hover:text-blue-600 font-bold transition-colors cursor-pointer text-md">[show
                                 card]</button>
                         </form>
 
                         <form action="/projects/<%= d.id %>?_method=DELETE" method="POST" class="z-10">
                             <button type="submit"
-                                class="uppercase text-red-400 hover:text-red-600 font-bold transition-colors cursor-pointer">[delete
+                                class="uppercase text-red-400 hover:text-red-600 font-bold transition-colors cursor-pointer text-md">[delete
                                 card]</button>
                         </form>
                     </div>
@@ -53,7 +78,7 @@
                 <% } %>
         </div>
 
-        <form action="projects/new" method="get">
+        <form action="/projects/new" method="get">
             <button type="submit"
                 class="p-5 font-bold text-slate-200 rounded-2xl w-full bg-linear-to-r from-zinc-500 via-yellow-300 to-red-500">
                 Create new card
